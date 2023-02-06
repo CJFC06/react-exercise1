@@ -3,39 +3,67 @@ import { posts as data } from "../data/posts";
 //private
 let posts = [...data];
 
-function getPosts() {
-  //get all posts
+export function getPosts() {
+  return [...posts];
 }
 
-function getPostsByUser(userId) {
-  //get all posts by userId
+export function getPostsByUser(userId) {
+  return posts.find((posts) => posts.userId === userId);
 }
 
-function getPostById(id) {
-  //get a single post by id
+export function getPostById(id) {
+  return posts.find((posts) => posts.id === id);
 }
 
-function addPost(post) {
-  //add new post to BEGINNING of posts array
-  // use generateId function and pass posts array as the argument to generate a unique id.
+export function addPost(post) {
+ posts.unshift(post)
 }
 
-function updatePostTitle(id, title) {
-  //update post title
+export function updatePostTitle(id, title) {
+  posts = posts.map((user) => {
+    if (user.id === id) {
+      return {
+        ...user,
+        ...title,
+      };
+    }
+
+    return user;
+  });
 }
 
-function updatePostBody(id, body) {
-  //update post body
+export function updatePostBody(id, body) {
+  posts = posts.map((user) => {
+    if (user.id === id) {
+      return {
+        ...user,
+        ...body,
+      };
+    }
+
+    return user;
+  });
 }
 
-function updatePost(id, post) {
-  //update post title and or body (imagine a form where user is allowed to edit both title and post but may also choose to only edit one of them)
+export function updatePost(id, post) {
+  posts = posts.map((user) => {
+    if (user.id === id) {
+      return {
+        ...user,
+        ...post,
+      };
+    }
+
+    return user;
+  });
 }
 
-function deletePostBy(id) {
-  //delete post by id
+export function deletePostBy(id) {
+  posts = posts.filter(posts => posts.id !== id)
+  return posts;
 }
 
-function deletePostsByUserId(userId) {
-  //delete all posts of a user by given userId
+export function deletePostsByUserId(userId) {
+  posts = posts.filter(posts => posts.userId !== userId)
+  return posts;
 }

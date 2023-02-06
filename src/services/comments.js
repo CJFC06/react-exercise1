@@ -3,23 +3,36 @@ import { comments as data } from "../data/comments";
 //private
 let comments = [...data];
 
-function getCommentById(id) {
-  //get comment by id
+
+export function getComments() {
+  return [...comments];
+}
+export function getCommentById(id) {
+  return comments.find((comments) => comments.id === id);
 }
 
-function getCommentsByPostId(postId) {
-  //get comments by post id
+export function getCommentsByPostId(postId) {
+  return comments.find((comments) => comments.postId === postId);  
 }
 
-function updateCommentBody(id, body) {
-  //update comment body
+export function updateCommentBody(id, body) {
+  comments = comments.map((user) => {
+    if (user.id === id) {
+      return {
+        ...user,
+        ...body,
+      };
+    }
+
+    return user;
+  });
 }
 
-function deleteCommentById(id) {
-  //delete comment by id
+export function deleteCommentById(id) {
+  comments = comments.filter(comment => comment.id !== id)
+  return comments;
 }
 
-function addComment(comment) {
-  //add comment to comments array
-  // use generateId function and pass comments array as the argument to generate a unique id.
+export function addComment(comment) {
+  comments.push(comment)
 }
